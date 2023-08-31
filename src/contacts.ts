@@ -1,14 +1,7 @@
 import localforage from "localforage";
 import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
-
-// `Contact` type
-type Contact = {
-  id: string;
-  first?: string;
-  last?: string;
-  createdAt?: number;
-};
+import { Contact } from "./utils/types";
 
 // `query` is optional.
 export async function getContacts(query?: string) {
