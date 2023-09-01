@@ -9,3 +9,7 @@ export type Contact = {
   notes?: string;
   favorite?: boolean;
 };
+
+export type Params = {
+  contactId?: string;
+};
