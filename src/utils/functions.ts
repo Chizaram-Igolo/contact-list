@@ -17,6 +17,10 @@ export async function rootLoader({ request }: { request: Request }) {
 
 export async function contactLoader({ params }: { params: ParamsType }) {
   const contact = await getContact(params.contactId ?? "");
+
+  if (!contact) {
+    throw new Response("", { status: 404, statusText: "Not Found" });
+  }
   return contact;
 }
 
