@@ -1,4 +1,4 @@
-import { Form, useLoaderData } from "react-router-dom";
+import { Form, useLoaderData, useFetcher } from "react-router-dom";
 import { Contact as ContactType } from "../utils/types";
 import { contactLoader } from "../utils/functions";
 
@@ -68,10 +68,11 @@ interface IFavorite {
 }
 
 const Favorite: React.FC<IFavorite> = ({ contact }) => {
+  const fetcher = useFetcher();
   const favorite = contact.favorite;
 
   return (
-    <Form method="post">
+    <fetcher.Form method="post">
       <button
         name="favorite"
         value={favorite ? "false" : "true"}
@@ -79,6 +80,6 @@ const Favorite: React.FC<IFavorite> = ({ contact }) => {
       >
         {favorite ? "★" : "☆"}
       </button>
-    </Form>
+    </fetcher.Form>
   );
 };

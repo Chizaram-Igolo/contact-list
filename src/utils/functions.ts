@@ -42,3 +42,16 @@ export async function destroyAction({ params }: { params: ParamsType }) {
   await deleteContact(params.contactId ?? "");
   return redirect("/");
 }
+
+export async function contactAction({
+  request,
+  params,
+}: {
+  request: Request;
+  params: ParamsType;
+}) {
+  let formData = await request.formData();
+  return updateContact(params.contactId || "", {
+    favorite: formData.get("favorite") as string,
+  });
+}
