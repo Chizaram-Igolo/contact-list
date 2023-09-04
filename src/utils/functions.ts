@@ -8,9 +8,11 @@ import {
 } from "../contacts";
 import { Params as ParamsType } from "./types";
 
-export async function rootLoader() {
-  const contacts = await getContacts();
-  return contacts;
+export async function rootLoader({ request }: { request: Request }) {
+  const url = new URL(request.url);
+  const q = url.searchParams.get("q");
+  const contacts = await getContacts(q ?? "");
+  return { contacts, q };
 }
 
 export async function contactLoader({ params }: { params: ParamsType }) {
@@ -37,7 +39,6 @@ export async function editAction({
 }
 
 export async function destroyAction({ params }: { params: ParamsType }) {
-  throw new Error("oh dang!");
   await deleteContact(params.contactId ?? "");
   return redirect("/");
 }
