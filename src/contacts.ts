@@ -1,7 +1,7 @@
 import localforage from "localforage";
 import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
-import { Contact } from "./utils/types";
+import { Contact, Update } from "./utils/types";
 
 // `query` is optional.
 export async function getContacts(query?: string) {
@@ -34,12 +34,12 @@ export async function getContact(id: string) {
   return contact ?? null;
 }
 
-export async function updateContact(id: string, updates: string[]) {
+export async function updateContact(id: string, updates: Update) {
   await fakeNetwork();
   const contacts: Contact[] | null = await localforage.getItem("contacts");
 
   // Add TypeGuard
-  if (!Array.isArray(contacts) || contacts.length > 0)
+  if (!Array.isArray(contacts) || contacts.length === 0)
     throw new Error("No contact found for " + id);
 
   const contact = contacts.find((contact) => contact.id === id);
@@ -53,7 +53,7 @@ export async function deleteContact(id: string) {
   const contacts: Contact[] | null = await localforage.getItem("contacts");
 
   // Add TypeGuard
-  if (!Array.isArray(contacts) || contacts.length > 0)
+  if (!Array.isArray(contacts) || contacts.length === 0)
     throw new Error("No contact found for " + id);
 
   const index = contacts.findIndex((contact) => contact.id === id);

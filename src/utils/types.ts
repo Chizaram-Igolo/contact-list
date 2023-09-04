@@ -13,3 +13,7 @@ export type Contact = {
 export type Params = {
   contactId?: string;
 };
+
+export type Update = {
+  [k: string]: FormDataEntryValue;
+};
