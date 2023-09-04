@@ -80,7 +80,7 @@ button:active {
   color: #a4a4a4;
 }
 #contact h1 form button[value="true"]:hover,
-#contact h1 form button[value="false"] {
+#contact h1 form button[value=""] {
   color: #eeb004;
 }
 

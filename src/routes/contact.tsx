@@ -69,13 +69,17 @@ interface IFavorite {
 
 const Favorite: React.FC<IFavorite> = ({ contact }) => {
   const fetcher = useFetcher();
-  const favorite = contact.favorite;
+  let favorite = contact.favorite;
+
+  if (fetcher.formData) {
+    favorite = fetcher.formData.get("favorite") === "true";
+  }
 
   return (
     <fetcher.Form method="post">
       <button
         name="favorite"
-        value={favorite ? "false" : "true"}
+        value={favorite ? "" : "true"}
         aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
       >
         {favorite ? "★" : "☆"}
